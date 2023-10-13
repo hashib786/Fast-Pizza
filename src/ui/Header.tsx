@@ -13,17 +13,18 @@ const Header = () => {
   };
 
   return (
-    <div>
+    <header className="bg-yellow-500 ">
       <Link to="/">Home</Link>
       <form onSubmit={handleSubmit}>
         <input
+          className="border border-b-2 bg-transparent"
           type="text"
           placeholder="Enter Order Id..."
           onChange={(e) => setQuery(e.target.value)}
           value={query}
         />
       </form>
-    </div>
+    </header>
   );
 };
 
