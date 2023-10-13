@@ -9,7 +9,7 @@ import {
 } from "../../utils/helpers";
 
 export interface CartI {
-  pizzaId: number;
+  pizzaId?: number;
   name: string;
   quantity: number;
   unitPrice: number;

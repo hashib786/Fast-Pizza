@@ -1,12 +1,14 @@
-import { useState } from "react";
+import { ActionFunctionArgs, Form, redirect } from "react-router-dom";
+import { createOrder } from "../../services/apiRestaurant";
+import { CartI } from "./Order";
 
 // https://uibakery.io/regex-library/phone-number
-const isValidPhone = (str) =>
-  /^\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$/.test(
-    str
-  );
+// const isValidPhone = (str: string) =>
+//   /^\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$/.test(
+//     str
+//   );
 
-const fakeCart = [
+const fakeCart: CartI[] = [
   {
     pizzaId: 12,
     name: "Mediterranean",
@@ -32,13 +34,13 @@ const fakeCart = [
 
 function CreateOrder() {
   // const [withPriority, setWithPriority] = useState(false);
-  const cart = fakeCart;
+  // const cart = fakeCart;
 
   return (
     <div>
       <h2>Ready to order? Let's go!</h2>
 
-      <form>
+      <Form method="POST">
         <div>
           <label>First Name</label>
           <input type="text" name="customer" required />
@@ -68,13 +70,27 @@ function CreateOrder() {
           />
           <label htmlFor="priority">Want to yo give your order priority?</label>
         </div>
+        <input type="hidden" name="cart" value={JSON.stringify(fakeCart)} />
 
         <div>
           <button>Order now</button>
         </div>
-      </form>
+      </Form>
     </div>
   );
 }
+
+// eslint-disable-next-line react-refresh/only-export-components
+export const orderCreateAction = async ({ request }: ActionFunctionArgs) => {
+  const data = await request.formData();
+  const value = Object.fromEntries(data);
+  const res = await createOrder({
+    ...value,
+    priority: value.priority === "on",
+    cart: JSON.parse(value.cart),
+  });
+  console.log(res);
+  return redirect(`/order/${res.id}`);
+};
 
 export default CreateOrder;
