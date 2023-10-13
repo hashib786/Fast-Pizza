@@ -1,12 +1,18 @@
-import { ActionFunctionArgs, Form, redirect } from "react-router-dom";
+import {
+  ActionFunctionArgs,
+  Form,
+  redirect,
+  useActionData,
+  useNavigation,
+} from "react-router-dom";
 import { createOrder } from "../../services/apiRestaurant";
 import { CartI } from "./Order";
 
 // https://uibakery.io/regex-library/phone-number
-// const isValidPhone = (str: string) =>
-//   /^\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$/.test(
-//     str
-//   );
+const isValidPhone = (str: string) =>
+  /^\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$/.test(
+    str
+  );
 
 const fakeCart: CartI[] = [
   {
@@ -33,8 +39,12 @@ const fakeCart: CartI[] = [
 ];
 
 function CreateOrder() {
+  const navigation = useNavigation();
+  const isSubmitting = navigation.state === "submitting";
   // const [withPriority, setWithPriority] = useState(false);
   // const cart = fakeCart;
+
+  const fromErrors = useActionData();
 
   return (
     <div>
@@ -50,6 +60,7 @@ function CreateOrder() {
           <label>Phone number</label>
           <div>
             <input type="tel" name="phone" required />
+            {fromErrors?.phone ? <p>{fromErrors?.phone}</p> : null}
           </div>
         </div>
 
@@ -73,7 +84,7 @@ function CreateOrder() {
         <input type="hidden" name="cart" value={JSON.stringify(fakeCart)} />
 
         <div>
-          <button>Order now</button>
+          <button disabled={isSubmitting}>Order now</button>
         </div>
       </Form>
     </div>
@@ -84,12 +95,20 @@ function CreateOrder() {
 export const orderCreateAction = async ({ request }: ActionFunctionArgs) => {
   const data = await request.formData();
   const value = Object.fromEntries(data);
+
+  let errors = {};
+  if (isValidPhone(value.phone)) {
+    errors.phone = "Invalid phone number";
+  }
+
+  if (Object.keys(errors).length > 0) return errors;
+
   const res = await createOrder({
     ...value,
     priority: value.priority === "on",
     cart: JSON.parse(value.cart),
   });
-  console.log(res);
+
   return redirect(`/order/${res.id}`);
 };
 
