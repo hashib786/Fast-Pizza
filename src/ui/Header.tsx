@@ -13,7 +13,7 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-yellow-500 ">
+    <header className="border-b border-black bg-yellow-500 p-4 shadow-lg shadow-slate-600">
       <Link to="/" className="tracking-widest">
         Home
       </Link>
