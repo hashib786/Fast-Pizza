@@ -14,7 +14,9 @@ const Header = () => {
 
   return (
     <header className="bg-yellow-500 ">
-      <Link to="/">Home</Link>
+      <Link to="/" className="tracking-widest">
+        Home
+      </Link>
       <form onSubmit={handleSubmit}>
         <input
           className="border border-b-2 bg-transparent"
