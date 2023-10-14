@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import { createOrder } from "../../services/apiRestaurant";
 import { CartI } from "./Order";
+import Button from "../../ui/Button";
 
 // https://uibakery.io/regex-library/phone-number
 const isValidPhone = (str: string) =>
@@ -53,13 +54,15 @@ function CreateOrder() {
       <Form method="POST" className="m-4">
         <div>
           <label>First Name</label>
-          <input type="text" name="customer" required />
+          <div>
+            <input className="input" type="text" name="customer" required />
+          </div>
         </div>
 
         <div>
           <label>Phone number</label>
           <div>
-            <input type="tel" name="phone" required />
+            <input className="input" type="tel" name="phone" required />
             {fromErrors?.phone ? <p>{fromErrors?.phone}</p> : null}
           </div>
         </div>
@@ -67,12 +70,7 @@ function CreateOrder() {
         <div>
           <label>Address</label>
           <div>
-            <input
-              type="text"
-              name="address"
-              required
-              className="w-full rounded-full px-3 py-2 text-sm placeholder:text-stone-700 focus:outline-none focus:ring focus:ring-yellow-200 focus:ring-offset-2"
-            />
+            <input type="text" name="address" required className="input" />
           </div>
         </div>
 
@@ -90,12 +88,7 @@ function CreateOrder() {
         <input type="hidden" name="cart" value={JSON.stringify(fakeCart)} />
 
         <div>
-          <button
-            disabled={isSubmitting}
-            className="rounded-full bg-yellow-400 px-4 py-3 font-semibold uppercase outline-none transition-colors duration-500 ease-in-out hover:bg-yellow-300 focus:ring-2 focus:ring-yellow-400 focus:ring-offset-2 "
-          >
-            Order now
-          </button>
+          <Button disabled={isSubmitting}>Order now</Button>
         </div>
       </Form>
     </div>
