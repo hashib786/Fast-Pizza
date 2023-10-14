@@ -15,6 +15,8 @@ const Button = ({ children, disabled, to, type = "primary" }: Props) => {
   const styles = {
     primary: base + " px-4 py-3",
     small: base + " px-4 py-2 text-xs",
+    secondary:
+      "disabled:cursor-not-allowed rounded-full bg-transparent font-semibold uppercase outline-none transition-colors duration-500 ease-in-out hover:bg-stone-200 focus:ring-2 focus:ring-stone-400 focus:ring-offset-2 px-4 py-3 border border-stone-400",
   };
 
   if (to)

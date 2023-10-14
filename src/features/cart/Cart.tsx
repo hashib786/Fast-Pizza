@@ -1,6 +1,7 @@
 import { CartI } from "../order/Order";
 import Button from "../../ui/Button";
 import LinkButton from "../../ui/LinkButton";
+import CartItem from "./CartItem";
 
 const fakeCart: CartI[] = [
   {
@@ -28,17 +29,22 @@ const fakeCart: CartI[] = [
 
 function Cart() {
   const cart = fakeCart;
-  console.log(cart);
 
   return (
-    <div className="mt-6">
+    <div className="p-6">
       <LinkButton to="/menu">&larr; Back to menu</LinkButton>
 
-      <h2 className="my-4">Your cart, %NAME%</h2>
+      <h2 className="mt-6">Your cart, %NAME%</h2>
 
-      <div>
+      <ul className="my-4 mb-6 divide-y divide-stone-200">
+        {cart.map((item) => (
+          <CartItem item={item} key={item.pizzaId} />
+        ))}
+      </ul>
+
+      <div className="space-x-3">
         <Button to="/order/new">Order pizzas</Button>
-        <button>Clear cart</button>
+        <Button type="secondary">Clear cart</Button>
       </div>
     </div>
   );
