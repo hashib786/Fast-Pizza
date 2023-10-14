@@ -5,13 +5,23 @@ function MenuItem({ pizza }: { pizza: MenuI }) {
   const { name, unitPrice, ingredients, soldOut, imageUrl } = pizza;
 
   return (
-    <li>
-      <img src={imageUrl} alt={name} />
-      <div>
+    <li className="flex list-none gap-2 p-2">
+      <img
+        className={`h-24 ${soldOut ? "opacity-70 grayscale" : ""}`}
+        src={imageUrl}
+        alt={name}
+      />
+      <div className="flex flex-col">
         <p>{name}</p>
-        <p>{ingredients.join(", ")}</p>
-        <div>
-          {!soldOut ? <p>{formatCurrency(unitPrice)}</p> : <p>Sold out</p>}
+        <p className="text-xs capitalize italic text-stone-500">
+          {ingredients.join(", ")}
+        </p>
+        <div className="mt-auto">
+          {!soldOut ? (
+            <p className="text-sm">{formatCurrency(unitPrice)}</p>
+          ) : (
+            <p className="text-sm text-stone-500">Sold out</p>
+          )}
         </div>
       </div>
     </li>
