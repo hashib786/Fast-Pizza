@@ -47,7 +47,7 @@ function CreateOrder() {
   const fromErrors = useActionData();
 
   return (
-    <div>
+    <div className="mt-3 sm:mt-6">
       <h2>Ready to order? Let's go!</h2>
 
       <Form method="POST" className="m-4">
@@ -67,7 +67,12 @@ function CreateOrder() {
         <div>
           <label>Address</label>
           <div>
-            <input type="text" name="address" required />
+            <input
+              type="text"
+              name="address"
+              required
+              className="w-full rounded-full px-3 py-2 text-sm placeholder:text-stone-700 focus:outline-none focus:ring focus:ring-yellow-200 focus:ring-offset-2"
+            />
           </div>
         </div>
 
@@ -76,6 +81,7 @@ function CreateOrder() {
             type="checkbox"
             name="priority"
             id="priority"
+            className="aspect-[1] w-6 accent-yellow-400 focus:outline-none focus:ring focus:ring-yellow-200 focus:ring-offset-2"
             // value={withPriority}
             // onChange={(e) => setWithPriority(e.target.checked)}
           />
