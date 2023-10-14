@@ -13,13 +13,13 @@ const Header = () => {
   };
 
   return (
-    <header className="border-b border-black bg-yellow-500 p-4 shadow-lg shadow-slate-600">
-      <Link to="/" className="tracking-widest">
-        Home
+    <header className="flex items-center justify-between border-b border-black bg-yellow-400 p-4 shadow-lg shadow-slate-600">
+      <Link to="/" className="font-bold tracking-widest">
+        Hashib Pizza Co.
       </Link>
       <form onSubmit={handleSubmit}>
         <input
-          className="border border-b-2 bg-transparent"
+          className="w-36 rounded-full bg-transparent bg-yellow-300 px-3 py-2 text-sm transition-all duration-500 placeholder:text-stone-800 focus:outline-none focus:ring focus:ring-yellow-200 active:border-none sm:w-52 sm:focus:w-72"
           type="text"
           placeholder="Enter Order Id..."
           onChange={(e) => setQuery(e.target.value)}

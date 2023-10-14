@@ -11,7 +11,7 @@ import { CartI } from "./Order";
 // https://uibakery.io/regex-library/phone-number
 const isValidPhone = (str: string) =>
   /^\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$/.test(
-    str
+    str,
   );
 
 const fakeCart: CartI[] = [
@@ -50,7 +50,7 @@ function CreateOrder() {
     <div>
       <h2>Ready to order? Let's go!</h2>
 
-      <Form method="POST">
+      <Form method="POST" className="m-4">
         <div>
           <label>First Name</label>
           <input type="text" name="customer" required />
@@ -84,7 +84,12 @@ function CreateOrder() {
         <input type="hidden" name="cart" value={JSON.stringify(fakeCart)} />
 
         <div>
-          <button disabled={isSubmitting}>Order now</button>
+          <button
+            disabled={isSubmitting}
+            className="rounded-full bg-yellow-400 px-4 py-3 font-semibold uppercase outline-none transition-colors duration-500 ease-in-out hover:bg-yellow-300 focus:ring-2 focus:ring-yellow-400 focus:ring-offset-2 "
+          >
+            Order now
+          </button>
         </div>
       </Form>
     </div>
