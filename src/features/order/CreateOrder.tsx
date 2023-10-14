@@ -48,33 +48,33 @@ function CreateOrder() {
   const fromErrors = useActionData();
 
   return (
-    <div className="mt-3 sm:mt-6">
-      <h2>Ready to order? Let's go!</h2>
+    <div className="mt-3 p-3 sm:mt-6">
+      <h2 className="text-lg font-semibold">Ready to order? Let's go!</h2>
 
       <Form method="POST" className="m-4">
-        <div>
-          <label>First Name</label>
-          <div>
+        <div className="mb-3 flex flex-col gap-2 sm:flex-row sm:items-center">
+          <label className="basis-36">First Name</label>
+          <div className="grow">
             <input className="input" type="text" name="customer" required />
           </div>
         </div>
 
-        <div>
-          <label>Phone number</label>
-          <div>
+        <div className="mb-3 flex flex-col gap-2 sm:flex-row sm:items-center">
+          <label className="basis-36">Phone number</label>
+          <div className="grow">
             <input className="input" type="tel" name="phone" required />
             {fromErrors?.phone ? <p>{fromErrors?.phone}</p> : null}
           </div>
         </div>
 
-        <div>
-          <label>Address</label>
-          <div>
+        <div className="mb-3 flex flex-col gap-2 sm:flex-row sm:items-center">
+          <label className="basis-36">Address</label>
+          <div className="grow">
             <input type="text" name="address" required className="input" />
           </div>
         </div>
 
-        <div>
+        <div className="mb-7 flex items-center gap-4">
           <input
             type="checkbox"
             name="priority"
@@ -83,7 +83,9 @@ function CreateOrder() {
             // value={withPriority}
             // onChange={(e) => setWithPriority(e.target.checked)}
           />
-          <label htmlFor="priority">Want to yo give your order priority?</label>
+          <label className="text-sm font-semibold" htmlFor="priority">
+            Want to yo give your order priority?
+          </label>
         </div>
         <input type="hidden" name="cart" value={JSON.stringify(fakeCart)} />
 
