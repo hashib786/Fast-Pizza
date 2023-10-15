@@ -9,7 +9,9 @@ import { fetchAddress } from "../user/userSlice";
 import { AnyAction, ThunkDispatch } from "@reduxjs/toolkit";
 
 function CreateOrder() {
-  const { userName } = useSelector((state: RootState) => state.user);
+  const { userName, address, position } = useSelector(
+    (state: RootState) => state.user,
+  );
   const navigation = useNavigation();
   const isSubmitting = navigation.state === "submitting";
   const [withPriority, setWithPriority] = useState(false);
@@ -26,9 +28,6 @@ function CreateOrder() {
   return (
     <div className="mt-3 p-3 sm:mt-6">
       <h2 className="text-lg font-semibold">Ready to order? Let's go!</h2>
-      <Button type="primary" onClick={() => dispatch(fetchAddress())}>
-        Get Position
-      </Button>
 
       <Form method="POST" className="m-4">
         <div className="mb-3 flex flex-col gap-2 sm:flex-row sm:items-center">
@@ -54,8 +53,27 @@ function CreateOrder() {
 
         <div className="mb-3 flex flex-col gap-2 sm:flex-row sm:items-center">
           <label className="sm:basis-36">Address</label>
-          <div className="grow">
-            <input type="text" name="address" required className="input" />
+          <div className="relative grow">
+            <input
+              type="text"
+              defaultValue={address}
+              name="address"
+              required
+              className="input"
+            />
+            {!position && (
+              <span className="absolute right-[1px] top-[1px] sm:top-[3px]">
+                <Button
+                  type="small"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    dispatch(fetchAddress());
+                  }}
+                >
+                  Get Position
+                </Button>
+              </span>
+            )}
           </div>
         </div>
 

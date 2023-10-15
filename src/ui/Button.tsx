@@ -6,7 +6,7 @@ type Props = {
   disabled?: boolean;
   to?: string;
   type?: string;
-  onClick?: () => void;
+  onClick?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 };
 
 const Button = ({
