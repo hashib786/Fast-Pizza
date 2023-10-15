@@ -9,7 +9,8 @@ import DeleteItem from "../cart/DeleteItem";
 function MenuItem({ pizza }: { pizza: MenuI }) {
   const { id, name, unitPrice, ingredients, soldOut, imageUrl } = pizza;
   const dispatch = useDispatch();
-  const isInCart = useSelector(getItemInCart(id));
+  const currentItemQuantity = useSelector(getItemInCart(id));
+  const isInCart = currentItemQuantity > 0;
 
   const handleClick = () => {
     const newItem: CartI = {
