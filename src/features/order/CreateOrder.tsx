@@ -40,14 +40,14 @@ function CreateOrder() {
 
       <Form method="POST" className="m-4">
         <div className="mb-3 flex flex-col gap-2 sm:flex-row sm:items-center">
-          <label className="basis-36">First Name</label>
+          <label className="sm:basis-36">First Name</label>
           <div className="grow">
             <input className="input" type="text" name="customer" required />
           </div>
         </div>
 
         <div className="mb-3 flex flex-col gap-2 sm:flex-row sm:items-center">
-          <label className="basis-36">Phone number</label>
+          <label className="sm:basis-36">Phone number</label>
           <div className="grow">
             <input className="input" type="tel" name="phone" required />
             {fromErrors?.phone ? <p>{fromErrors?.phone}</p> : null}
@@ -55,7 +55,7 @@ function CreateOrder() {
         </div>
 
         <div className="mb-3 flex flex-col gap-2 sm:flex-row sm:items-center">
-          <label className="basis-36">Address</label>
+          <label className="sm:basis-36">Address</label>
           <div className="grow">
             <input type="text" name="address" required className="input" />
           </div>
