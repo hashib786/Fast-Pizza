@@ -6,9 +6,16 @@ type Props = {
   disabled?: boolean;
   to?: string;
   type?: string;
+  onClick?: () => void;
 };
 
-const Button = ({ children, disabled, to, type = "primary" }: Props) => {
+const Button = ({
+  children,
+  disabled,
+  to,
+  type = "primary",
+  onClick,
+}: Props) => {
   const base =
     "text-sm rounded-full bg-yellow-400 font-semibold uppercase outline-none transition-colors duration-500 ease-in-out hover:bg-yellow-300 focus:ring-2 focus:ring-yellow-400 focus:ring-offset-2";
 
@@ -25,6 +32,18 @@ const Button = ({ children, disabled, to, type = "primary" }: Props) => {
         {children}
       </Link>
     );
+
+  if (onClick) {
+    return (
+      <button
+        onClick={onClick}
+        disabled={disabled}
+        className={styles[type as keyof typeof styles]}
+      >
+        {children}
+      </button>
+    );
+  }
 
   return (
     <button disabled={disabled} className={styles[type as keyof typeof styles]}>
