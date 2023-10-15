@@ -49,3 +49,9 @@ export const {
   decrementItemQuantity,
   clearItem,
 } = actions;
+
+export const getTotalQuantity = (state: RootState) =>
+  state.cart.cart.reduce((sum: number, curr) => sum + curr.quantity, 0);
+
+export const getTotalPrice = (state: RootState) =>
+  state.cart.cart.reduce((sum: number, curr) => sum + curr.totalPrice, 0);
