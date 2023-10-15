@@ -1,6 +1,7 @@
 import { Form, useActionData, useNavigation } from "react-router-dom";
 import { CartI } from "./Order";
 import Button from "../../ui/Button";
+import { useSelector } from "react-redux";
 
 const fakeCart: CartI[] = [
   {
@@ -27,6 +28,7 @@ const fakeCart: CartI[] = [
 ];
 
 function CreateOrder() {
+  const { userName } = useSelector((state: RootState) => state.user);
   const navigation = useNavigation();
   const isSubmitting = navigation.state === "submitting";
   // const [withPriority, setWithPriority] = useState(false);
@@ -42,7 +44,13 @@ function CreateOrder() {
         <div className="mb-3 flex flex-col gap-2 sm:flex-row sm:items-center">
           <label className="sm:basis-36">First Name</label>
           <div className="grow">
-            <input className="input" type="text" name="customer" required />
+            <input
+              className="input"
+              type="text"
+              defaultValue={userName}
+              name="customer"
+              required
+            />
           </div>
         </div>
 
