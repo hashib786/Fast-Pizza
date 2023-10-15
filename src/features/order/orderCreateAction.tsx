@@ -1,5 +1,7 @@
 import { ActionFunctionArgs, redirect } from "react-router-dom";
 import { createOrder } from "../../services/apiRestaurant";
+import store from "../store";
+import { clearItem } from "../cart/cartSlice";
 
 // https://uibakery.io/regex-library/phone-number
 export const isValidPhone = (str: string) =>
@@ -15,18 +17,20 @@ export const orderCreateAction = async ({ request }: ActionFunctionArgs) => {
     priority?: string;
   };
 
-  const errors = {} as { phone?: string };
-  if (isValidPhone(value.phone || "")) {
-    errors.phone = "Invalid phone number";
-  }
+  // const errors = {} as { phone?: string };
+  // if (isValidPhone(value.phone || "")) {
+  //   errors.phone = "Invalid phone number";
+  // }
 
-  if (Object.keys(errors).length > 0) return errors;
+  // if (Object.keys(errors).length > 0) return errors;
 
   const res = await createOrder({
     ...value,
-    priority: value.priority === "on",
+    priority: value.priority === "true",
     cart: JSON.parse(value.cart || ""),
   });
+
+  store.dispatch(clearItem());
 
   return redirect(`/order/${res.id}`);
 };
