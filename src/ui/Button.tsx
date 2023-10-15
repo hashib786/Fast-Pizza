@@ -22,6 +22,7 @@ const Button = ({
   const styles = {
     primary: base + " px-4 py-3",
     small: base + " px-4 py-2 text-xs",
+    round: base + " px-3 py-1 text-sm",
     secondary:
       "text-sm disabled:cursor-not-allowed rounded-full bg-transparent font-semibold uppercase outline-none transition-colors duration-500 ease-in-out hover:bg-stone-200 focus:ring-2 focus:ring-stone-400 focus:ring-offset-2 px-4 py-3 border border-stone-400",
   };

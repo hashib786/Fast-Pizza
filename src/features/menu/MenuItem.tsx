@@ -5,6 +5,7 @@ import { MenuI } from "./Menu";
 import { addItem, getItemInCart } from "../cart/cartSlice";
 import { CartI } from "../order/Order";
 import DeleteItem from "../cart/DeleteItem";
+import UpdateQuantity from "./UpdateQuantity";
 
 function MenuItem({ pizza }: { pizza: MenuI }) {
   const { id, name, unitPrice, ingredients, soldOut, imageUrl } = pizza;
@@ -42,7 +43,12 @@ function MenuItem({ pizza }: { pizza: MenuI }) {
             <p className="text-sm uppercase text-stone-500">Sold out</p>
           )}
 
-          {isInCart && <DeleteItem pizzaId={id} />}
+          {isInCart && (
+            <div className="flex gap-2 sm:gap-6">
+              <UpdateQuantity pizzaId={id} quantity={currentItemQuantity} />
+              <DeleteItem pizzaId={id} />
+            </div>
+          )}
 
           {!soldOut && !isInCart && (
             <Button onClick={handleClick} type="small">
