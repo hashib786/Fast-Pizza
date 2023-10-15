@@ -1,5 +1,4 @@
 import { useLoaderData } from "react-router-dom";
-import { getMenu } from "../../services/apiRestaurant";
 import MenuItem from "./MenuItem";
 
 export interface MenuI {
@@ -22,10 +21,5 @@ function Menu() {
     </ul>
   );
 }
-
-// eslint-disable-next-line react-refresh/only-export-components
-export const menuLoader = async () => {
-  return await getMenu();
-};
 
 export default Menu;
